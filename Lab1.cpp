@@ -7,11 +7,18 @@ using namespace std;
 using T = char;
 const int radix = sizeof(T)*8;
 
+
+
 template<typename T>
 class Binnum {
     array<bool,radix> bin;
 
 public:
+static void check_range(int number) {
+    if (number < numeric_limits<T>::min() || number > numeric_limits<T>::max()) {
+            throw runtime_error("number is out of range");
+    }
+}
     Binnum() :
             bin({}) {}
 
@@ -29,7 +36,7 @@ public:
 
 
     array<bool,radix> to_bin(T num) {
-      check_range(num);
+      Binnum<T>::check_range(num);
         array<bool,radix> bin;
         map<int, int> masks = {{8,0100}, {16, 040000},
         {32, 010000000000}};
@@ -160,11 +167,7 @@ T mask = masks[radix];
 
 
 
-void check_range(int number) {
-    if (number < numeric_limits<T>::min() || number > numeric_limits<T>::max()) {
-            throw runtime_error("number is out of range");
-    }
-}
+
 
 
 
@@ -179,14 +182,14 @@ void handler() {
     cout << "First operand: ";
     cin >> input;
     operand1 = stoi(input);
-    check_range(operand1);
+    Binnum<T>::check_range(operand1);
     cout << "Operator: ";
     cin >> op;
     cout << "Number 2: ";
     cin >> input;
     operand2 = stoi(input);
     
-    check_range(operand2);
+    Binnum<T>check_range(operand2);
     Binnum<T> a(operand1);
     Binnum<T> b(operand2);
     cout << "Binary representation of 1st operand: " << a << endl;
