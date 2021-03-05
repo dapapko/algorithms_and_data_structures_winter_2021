@@ -1,9 +1,4 @@
-//
-// Created by drford on 14.02.2021.
-//
-
-#ifndef TIGER_LAB2_STACKMACHINE_H
-#define TIGER_LAB2_STACKMACHINE_H
+#pragma once
 #include <vector>
 #include <string>
 #include <iostream>
@@ -118,6 +113,3 @@ public:
         return result;
     }
 };
-
-
-#endif //TIGER_LAB2_STACKMACHINE_H
