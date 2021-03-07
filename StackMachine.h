@@ -30,57 +30,6 @@ public:
         }
     }
 
-    void infixToRPN() {
-        map<string, int> ops;
-        vector<string> res;
-        ops["x"] = 3;
-        ops["+"] = 2; ops["-"] = 2;
-        ops["("] = 1;
-        Stack<string> result;
-        Stack<string> operations;
-        for (string value : expression) {
-            if (!isOperand(value))
-            {
-
-                if (value == ")") {
-                    while (operations.peek() != "(")
-                    {
-                        res.push_back(operations.peek());
-                        operations.pop();
-
-                    }
-                    operations.pop();
-                }
-                else if (value == ")")
-                {
-                    operations.push(value);
-                }
-                else if (operations.empty() || (ops[operations.peek()] < ops[value]))
-                {
-                    operations.push(value);
-                }
-                else
-                {
-                    do
-                    {
-                        res.push_back(operations.pop());
-                    } while (!(operations.empty() || (ops[operations.peek()] < ops[value])));
-                    operations.push(value);
-                }
-            }
-            else
-            {
-                res.push_back(value);
-            }
-        }
-        while (!operations.empty())
-        {
-            res.push_back(operations.pop());
-        }
-
-        expression = res;
-    }
-
     Binnum<T> evaluate() {
         auto* stack = new Stack<Binnum<T>>();
         for (string e : expression) {
